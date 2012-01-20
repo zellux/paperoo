@@ -1,0 +1,24 @@
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>
+        <%= t("activerecord.attributes.conference.title", :default => t("activerecord.labels.title", :default => "Title")) %>
+      </th>
+      <th>Book title</th>
+      <th>Articles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @conferences.each do |conference| -%>
+      <tr>
+        <td><%= link_to conference.title, conference_path(conference) %></td>
+        <td><%= conference.booktitle %></td>
+        <td><%= conference.articles_count %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
+
+<%= paginate @conferences %>
+
+<%= link_to "New", new_conference_path, :class => 'btn primary' %>

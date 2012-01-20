@@ -3,3 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 .sass-cache/
+*flymake.rb
+.#*
+db/raw_data
+config/database.yml

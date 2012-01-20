@@ -39,3 +39,25 @@ end
 group :development, :test do
   gem 'rspec-rails'
 end
+
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+gem 'carrierwave'
+gem 'jbuilder'
+gem 'bibtex-ruby'
+gem 'chosen-rails'
+gem 'mechanize'
+gem 'factory_girl_rails'
+gem 'nokogiri'
+gem 'htmlentities'
+gem 'kaminari'
+gem 'stringex'
+gem 'mysql2'
+gem 'yaml_db'
+gem 'rails3-jquery-autocomplete'
+gem 'nifty-generators'
+gem "jquery-rails"
+gem 'capistrano'
+gem 'unicorn'
+gem 'devise'
+

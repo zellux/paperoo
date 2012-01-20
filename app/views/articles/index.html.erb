@@ -1,0 +1,8 @@
+<%= render :partial => "list", :locals => { :articles => @articles } %>
+
+<%= paginate @articles %>
+
+<%= link_to "New", new_article_path, :class => 'btn primary' %>
+
+<br />
+<br />

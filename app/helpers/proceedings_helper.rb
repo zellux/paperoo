@@ -1,0 +1,2 @@
+module ProceedingsHelper
+end

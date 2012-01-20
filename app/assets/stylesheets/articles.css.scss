@@ -1,0 +1,13 @@
+// Place all the styles related to the articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// *= require fileuploader
+
+.article_info {
+    .row {
+        margin-top: 10px;
+        .label {
+            margin-right: 5px;
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<%= form_for(@article) do |f| %>
+  <div class="clearfix">
+    <%= f.label :title, t("activerecord.attributes.article.title", :default => "Title"), :class => :label %>
+    <div class="input">
+      <%= f.text_field :title, :class => 'text_field span11' %>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :authors, t("activerecord.attributes.article.authors"), :class => :label %>
+    <div class="input">
+      <%= f.text_field :author_list, :class => 'text_field span11' %>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :conference_id, t("activerecord.attributes.article.conference"), :class => :label %>
+    <div class="input">
+      <select data-placeholder="Please select conference" class="chzn-select span11" tabindex="2" name="article[conference_id]">
+        <option value=""></option>
+        <% for c in Conference.all %>
+          <%= option_for_conference(c, @article.conference) %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :year, t("activerecord.attributes.article.pages"), :class => :label %>
+    <div class="input">
+      <%= f.number_field :page_start, :class => 'number_field span2' %> --
+      <%= f.number_field :page_end, :class => 'number_field span2' %>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :year, t("activerecord.attributes.article.year", :default => "Year"), :class => :label %>
+    <div class="input">
+      <%= f.number_field :year, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :abstract, t("activerecord.attributes.article.abstract", :default => "Abstract"), :class => :label %>
+    <div class="input">
+      <%= f.text_area :abstract, :class => 'text_area span11' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn primary" type="submit">Save</button> or
+    <%= link_to "Cancel", articles_path %>
+  </div>
+<% end %>
+
+<div id="bibtex-uploader">       
+  <noscript>          
+    <p>Please enable JavaScript to use file uploader.</p>
+    <!-- or put a simple form for upload here -->
+  </noscript>         
+</div>
+
+<div id="endnote-uploader">       
+  <noscript>          
+    <p>Please enable JavaScript to use file uploader.</p>
+    <!-- or put a simple form for upload here -->
+  </noscript>         
+</div>
+
+<script type="text/javascript">
+  $(".chzn-select").chosen()
+</script>

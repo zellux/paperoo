@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Paperoo</title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "home" %>
+  </head>
+  <body class="home">
+    <script>
+      $(document).ready(function() {
+        $(".logo").center();
+      });
+    </script>
+    <div class="enter">
+      <h1>Paperoo</h1>
+      <div class="hint">The missing collaborative paper discussing tool</div>
+      <div class="button">
+        <a href="/articles" class="butt">Enter</a>
+      </div>
+    </div>
+  </body>
+</html>

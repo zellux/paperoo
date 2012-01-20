@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="author">
+  <%= @author.name %>
+</h2>
+
+<table class="zebra-striped">
+  <tbody>
+  <% @author_lines.each do |l| -%>
+    <% article = l.article %>
+   <tr>
+    <td><%= article.conference.title rescue '' %></td>
+    <td><%= link_to article.title, article_path(article) %>
+    <td><%= (l.position+1).ordinalize %> author</td>
+    <% end -%>
+   </tbody>
+</table>
+
+<%= link_to 'Edit', edit_author_path(@author) %> |
+<%= link_to 'Back', authors_path %>

@@ -1,4 +1,23 @@
 Paperoo::Application.routes.draw do
+  devise_for :accounts
+
+  resources :authors do
+    get :autocomplete_author_name, :on => :collection
+    get '/page/:page', :on => :collection, :action => "index"
+    get '/search/:search', :on => :collection, :action => "index"
+  end
+
+  root :to => 'home#index'
+
+  resources :conferences do
+    get '/page/:page', :on => :collection, :action => "index"
+  end
+
+  resources :articles do
+    post 'upload', :on => :collection
+    get '/page/:page', :on => :collection, :action => "index"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

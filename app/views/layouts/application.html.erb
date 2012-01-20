@@ -4,11 +4,47 @@
   <title>Paperoo</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
+  <%= yield(:head) %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
+<body style="padding-top: 60px">
+  <div class="topbar" data-dropdown="dropdown">
+    <div class="topbar-inner">
+      <div class="container">
+        <h3><%= link_to "Paperoo", "/" %></h3>
+        <ul class="nav">
+          <%= bootstrap_nav_li_for 'articles' %>
+          <%= bootstrap_nav_li_for 'conferences' %>
+          <%= bootstrap_nav_li_for 'authors' %>
+        </ul>
+        <ul class="nav secondary-nav">
+          <% if defined?(current_account) and !current_account.nil? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle"><%= current_account.username %></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Secondary link</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><%= link_to('Logout', destroy_account_session_path, :method => :delete) %></li>
+            </ul>
+          </li>
+          <% else %>
+            <%= link_to('Login', new_account_session_path)  %>  
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <div class="content">
+      <div class="row">
+        <div class="span16">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

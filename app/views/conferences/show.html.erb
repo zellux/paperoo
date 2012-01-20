@@ -1,0 +1,25 @@
+
+<h2>Conference information</h2>
+
+<div class="conference_info">
+  <div class="row">
+    <label class="label"><%= t("activerecord.attributes.conference.title", :default => t("activerecord.labels.title", :default => "Title")) %></label>
+    <div><%= @conference.title %></div>
+  </div>
+
+  <div class="row">
+    <label class="label"><%= t("activerecord.attributes.conference.year", :default => t("activerecord.labels.year", :default => "Year")) %></label>
+    <div><%= @conference.year %></div>
+  </div>
+
+  <div class="row">
+    <label class="label"><%= t("activerecord.attributes.conference.booktitle", :default => t("activerecord.labels.booktitle", :default => "Booktitle")) %></label>
+    <div><%= @conference.booktitle %></div>
+  </div>
+</div>
+
+<h2>Papers</h2>
+
+<%= render :partial => "articles/list", :locals => { :articles => @conference.articles } %>
+
+<%= link_to "Back", conferences_path  %>
