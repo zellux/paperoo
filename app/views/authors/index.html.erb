@@ -6,7 +6,7 @@ Quick navigation <input type="text" id="author_search_field" data-autocomplete="
     <table>
       <% @by_pageview.each do |author| %>
         <tr>
-          <td><%= author.name %> (<%= pluralize(author.articles_count, 'article') %>)</td>
+          <td><%= link_to "#{author.name} (#{pluralize(author.articles_count, 'article')})",author %></td>
         </tr>
       <% end %>
     </table>
@@ -17,7 +17,7 @@ Quick navigation <input type="text" id="author_search_field" data-autocomplete="
     <table>
       <% @by_article.each do |author| %>
         <tr>
-          <td><%= author.name %> (<%= pluralize(author.articles_count, 'article') %>)</td>
+          <td><%= link_to "#{author.name} (#{pluralize(author.articles_count, 'article')})",author %></td>
         </tr>
       <% end %>
     </table>
