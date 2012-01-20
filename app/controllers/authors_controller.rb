@@ -6,12 +6,18 @@ class AuthorsController < ApplicationController
   # GET /authors
   # GET /authors.json
   def index
-    if params[:search]
-      @authors = Author.find(:all, :conditions => ["name LIKE ?", "%#{params[:search]}%"])
-    else
-      page_id = params[:page] || 1
-      @authors = Author.with_article.order('articles_count desc').page(page_id)
+    @by_pageview = Author.with_article.order('pageview desc').limit(10)
+    @by_article = Author.with_article.order('articles_count desc').limit(10)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @authors }
     end
+  end
+
+  def all
+    page_id = params[:page] || 1
+    @authors = Author.with_article.order('articles_count desc').page(page_id)
 
     respond_to do |format|
       format.html # index.html.erb

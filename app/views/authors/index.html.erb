@@ -1,29 +1,29 @@
 Quick navigation <input type="text" id="author_search_field" data-autocomplete="authors/autocomplete_author_name">
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Institute</th>
-    <th>Articles count</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="row">
+  <div class="span4">
+    <h2>Popular</h2>
+    <table>
+      <% @by_pageview.each do |author| %>
+        <tr>
+          <td><%= author.name %> (<%= pluralize(author.articles_count, 'article') %>)</td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
-<% @authors.each do |author| %>
-  <tr>
-    <td><%= author.name %></td>
-    <td><%= author.institute %></td>
-    <td><%= author.articles_count %></td>
-    <td><%= link_to 'Show', author %></td>
-    <td><%= link_to 'Edit', edit_author_path(author) %></td>
-    <td><%= link_to 'Destroy', author, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<%= paginate @authors %>
+  <div class="span4 offset2">
+    <h2>Productive</h2>
+    <table>
+      <% @by_article.each do |author| %>
+        <tr>
+          <td><%= author.name %> (<%= pluralize(author.articles_count, 'article') %>)</td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+</div>
 
 <br />
 
-<%= link_to 'New Author', new_author_path %>
+<%= link_to 'See all', all_authors_path %>

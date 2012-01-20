@@ -1,10 +1,12 @@
 Paperoo::Application.routes.draw do
   devise_for :accounts
 
+  match '/authors/all/page/:page', :controller => 'authors', :action => 'all'
   resources :authors do
-    get :autocomplete_author_name, :on => :collection
-    get '/page/:page', :on => :collection, :action => "index"
-    get '/search/:search', :on => :collection, :action => "index"
+    collection do
+      get :autocomplete_author_name
+      get '/all', :as => :all
+    end
   end
 
   root :to => 'home#index'
