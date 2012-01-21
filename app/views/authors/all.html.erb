@@ -5,19 +5,13 @@ Quick navigation <input type="text" id="author_search_field" data-autocomplete="
     <th>Name</th>
     <th>Institute</th>
     <th>Articles count</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @authors.each do |author| %>
   <tr>
-    <td><%= author.name %></td>
+    <td><%= link_to author.name, author %></td>
     <td><%= author.institute %></td>
     <td><%= author.articles_count %></td>
-    <td><%= link_to 'Show', author %></td>
-    <td><%= link_to 'Edit', edit_author_path(author) %></td>
-    <td><%= link_to 'Destroy', author, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

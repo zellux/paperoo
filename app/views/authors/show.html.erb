@@ -9,9 +9,9 @@
   <% @author_lines.each do |l| -%>
     <% article = l.article %>
    <tr>
-    <td><%= article.conference.title rescue '' %></td>
-    <td><%= link_to article.title, article_path(article) %>
-    <td><%= (l.position+1).ordinalize %> author</td>
+    <td class="span2"><%= article.conference.title rescue '' %></td>
+    <td class="span12"><%= link_to article.title, article_path(article) %>
+    <td class="span2"><%= (l.position+1).ordinalize %> author</td>
     <% end -%>
    </tbody>
 </table>
