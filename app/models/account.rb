@@ -27,13 +27,18 @@ class Account < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :username, :invite_code, :login
-  attr_accessor :login, :invite_code
+  attr_accessor :login, :invite_code, :avatar_url
   validates :email, :username, :uniqueness => true
   validates :email, :username, :presence => true
 
   validates_each :invite_code, :on => :create do |record, attr, value|
     record.errors.add attr, "Please enter correct invitation code" unless
       value && value == "2012GAMEOVER"
+  end
+
+  def avatar_url(size=48)
+    gravatar_id = Digest::MD5.hexdigest(self.email.downcase)
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
 protected

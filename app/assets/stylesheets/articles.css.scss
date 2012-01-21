@@ -14,4 +14,36 @@
 
 .article_social {
     margin-top: 20px;
+    .comments {
+        margin-top: 15px;
+        .comment {
+            .comment-avatar {
+                position: absolute;
+                padding-left: 10px;
+            }
+            .comment-body {
+                font-family: 'PT Serif', Georgia, 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
+                .comment-header {
+                    height: 14px;
+                    padding: 10px;
+                    border: 1px solid rgba(0, 0, 0, .15);
+                    background: url('http://mediacdn.disqus.com/1326940420/images/themes/houdini/backgrounds-sprite.png') 0 0 repeat-x;
+                    margin-bottom: 13px;
+                    .comment-author {
+                        font-weight: bold;
+                        font-size: 13px;
+                        color: #3B5998;
+                    }
+                }
+                .comment-message {
+                    font-size: 18px;
+                    margin-bottom: 18px;
+                }
+                .comment-footer {
+                    .post_date {
+                    }
+                }
+            }
+        }
+    }
 }

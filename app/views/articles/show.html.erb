@@ -1,4 +1,7 @@
-<h2><%= @article.title %></h2>
+<h1>
+  <%= @article.title %>
+</h1>
+
 
 <div class="article_info">
   <div class="row">
@@ -29,12 +32,37 @@
   </div>
 </div>
 
-<div class="article_social">
-  <div class="like">
+<div class="row article_social">
+  <div class="row like offset1">
     <% if @like %>
       <%= link_to "Unlike", toggle_like_article_path, :method => :post, :format => :json, :remote => true, :class => 'like_button button icon like' %>
     <% else %>
       <%= link_to "Like", toggle_like_article_path, :method => :post, :format => :json, :remote => true, :class => 'like_button button icon like' %>
+    <% end %>
+  </div>
+
+  <div class="row comments span8">
+    <% if @article.comments.blank? %>
+      No comments yet.
+    <% else %>
+      <% @article.comments.each do |c| %>
+      <div class="row comment">
+        <div class="comment-avatar span1"><%= image_tag c.account.avatar_url(36) %></div>
+        <div class="comment-body offset1">
+          <div class="comment-header">
+            <div class="comment-author"><%= c.account.username %></div>
+          </div>
+          <div class="comment-message">
+            <div class="comment-text">
+              <%= c.text %>
+            </div>
+          </div>
+          <div class="comment-footer">
+            <div class="post_date"><%= time_ago_in_words(c.created_at.gmtime) %> ago</div>
+          </div>
+        </div>
+      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
