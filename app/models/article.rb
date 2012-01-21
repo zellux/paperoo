@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: articles
+#
+#  id            :integer(4)      not null, primary key
+#  title         :string(255)
+#  abstract      :text
+#  conference_id :integer(4)
+#  year          :integer(4)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  page_start    :integer(4)
+#  page_end      :integer(4)
+#  pageview      :integer(4)      default(0)
+#
+
 require 'bibtex'
 
 class Article < ActiveRecord::Base

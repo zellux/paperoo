@@ -60,4 +60,4 @@ gem "jquery-rails"
 gem 'capistrano'
 gem 'unicorn'
 gem 'devise'
-
+gem 'annotate'
