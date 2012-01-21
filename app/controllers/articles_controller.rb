@@ -33,6 +33,9 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @article = Article.find(params[:id])
+    if current_account
+      @like = @article.likes.where(:account_id => current_account).first
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -104,6 +107,22 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_url }
       format.json { head :ok }
+    end
+  end
+
+  def toggle_like
+    @article = Article.find(params[:id])
+    like = @article.likes.where(:account_id => current_account).first
+    if like.nil?
+      @article.likes.create(:likeable_id => params[:id], :likeable_type => self.class.to_s, :account_id => current_account.id)
+      status = 'liked'
+    else
+      like.delete
+      status = 'unliked'
+    end
+
+    respond_to do |format|
+      format.json { render json: { 'status' => status } }
     end
   end
 

@@ -18,6 +18,9 @@ Paperoo::Application.routes.draw do
   resources :articles do
     post 'upload', :on => :collection
     get '/page/:page', :on => :collection, :action => "index"
+    member do
+      post 'toggle_like', :format => :json
+    end
   end
 
   # The priority is based upon order of creation:

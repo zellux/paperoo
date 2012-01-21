@@ -38,3 +38,11 @@ $ ->
       value = json[i]
       if value
         $("#article_#{i}").val(value)
+
+  like_button = $(".article_social .like_button")
+  like_button.bind "ajax:success", (event, data, status, xhr) =>
+    if data['status'] == 'unliked'
+      like_button.text('Like')
+    else if data['status'] == 'liked'
+      like_button.text('Unlike')
+    end
