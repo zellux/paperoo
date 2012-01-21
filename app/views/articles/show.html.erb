@@ -11,7 +11,7 @@
 
   <div class="row">
     <label class="label"><%= t("activerecord.labels.conference") %></label>
-    <div><%= link_to conference_full_name(@article.conference), @article.conference %></div>
+    <div><%= link_to @article.conference.title, @article.conference %></div>
   </div>
 
   <div class="row">
@@ -41,28 +41,58 @@
     <% end %>
   </div>
 
-  <div class="row comments span8">
-    <% if @article.comments.blank? %>
-      No comments yet.
-    <% else %>
-      <% @article.comments.each do |c| %>
-      <div class="row comment">
-        <div class="comment-avatar span1"><%= image_tag c.account.avatar_url(36) %></div>
-        <div class="comment-body offset1">
-          <div class="comment-header">
-            <div class="comment-author"><%= c.account.username %></div>
-          </div>
-          <div class="comment-message">
-            <div class="comment-text">
-              <%= c.text %>
+  <div class="row">
+    <div class ="comments span8">
+      <% if @article.comments.blank? %>
+        No comments yet.
+      <% else %>
+        <% @article.comments.each do |c| %>
+          <div class="row comment">
+            <div class="comment-avatar span1"><%= image_tag c.account.avatar_url(36) %></div>
+            <div class="comment-body offset1">
+              <div class="comment-header">
+                <div class="comment-author"><%= c.account.username %></div>
+              </div>
+              <div class="comment-message">
+                <div class="comment-text">
+                  <%= c.text %>
+                </div>
+              </div>
+              <div class="comment-footer">
+                <div class="post_date"><%= time_ago_in_words(c.created_at.gmtime) %> ago</div>
+              </div>
             </div>
           </div>
-          <div class="comment-footer">
-            <div class="post_date"><%= time_ago_in_words(c.created_at.gmtime) %> ago</div>
-          </div>
-        </div>
-      </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span8">
+      <% unless defined?(current_account) and current_account %>
+        Please sign in to comment.
+      <% else %>
+        <div class="comment-reply">
+        <div class="comment-avatar span1"><%= image_tag current_account.avatar_url(36) %></div>
+          <%= form_tag(:controller => 'comments', :action => 'create') do %>
+            <%= hidden_field_tag(:commentable_id, @article.id) %>
+            <%= hidden_field_tag(:commentable_type, @article.class.to_s) %>
+            <div class="row">
+              <div class="span7 offset1">
+                <%= text_area_tag(:text, nil, :placeholder => "Type your comment here.", :class => 'span7') %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="span8">
+                <div class="actions">
+                  <%= submit_tag "Post", :class => 'btn primary' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

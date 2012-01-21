@@ -46,4 +46,11 @@
             }
         }
     }
+
+    .comment-reply {
+        margin-top: 10px;
+        .comment-avatar {
+            position: absolute;
+        }
+    }
 }

@@ -23,6 +23,9 @@ Paperoo::Application.routes.draw do
     end
   end
 
+  resources :comments, :only => :create do
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
