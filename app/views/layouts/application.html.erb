@@ -36,8 +36,24 @@
     </div>
   </div>
   <div class="container">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if flash[:success] %>
+      <div class="alert-message success fade in" data-alert="alert">
+        <a class="close" href="#">&times;</a>
+        <p><%= flash[:success] %></p>
+      </div>
+    <% end %>
+    <% if flash[:warning] %>
+      <div class="alert-message warning fade in" data-alert="alert">
+        <a class="close" href="#">&times;</a>
+        <p><%= flash[:warning] %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert-message error fade in" data-alert="alert">
+        <a class="close" href="#">&times;</a>
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
     <div class="content">
       <div class="row">
         <div class="span16">

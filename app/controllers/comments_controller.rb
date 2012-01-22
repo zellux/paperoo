@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
                       :commentable_id => params[:commentable_id],
                       :commentable_type => params[:commentable_type],
                       :text => params[:text])
+    flash[:success] = "Comment added"
     redirect_to request.referer || article_index_path
   end
 
@@ -16,7 +17,7 @@ class CommentsController < ApplicationController
     if @comment.account_id != current_account.id
       flash[:error] = "You cannot modify other's comment"
     else
-      flash[:notice] = "Comment modified successfully"
+      flash[:success] = "Comment modified successfully"
       @comment.text = params[:text]
       if !@comment.save
         logger.error @comment.errors.full_messages
@@ -31,9 +32,8 @@ class CommentsController < ApplicationController
       flash[:error] = "You cannot delete other's comment"
     else
       @comment.destroy
-      flash[:notice] = "Comment deleted successfully"
+      flash[:success] = "Comment deleted successfully"
     end
     redirect_to request.referer || article_index_path
   end
 end
-

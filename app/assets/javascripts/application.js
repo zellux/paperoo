@@ -12,3 +12,7 @@
 //= require chosen-jquery
 //= require autocomplete-rails
 //= require_tree .
+
+$(document).ready(function () {
+  $().alert();
+});
