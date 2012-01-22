@@ -1,6 +1,7 @@
 Paperoo::Application.routes.draw do
   devise_for :accounts
 
+  match "/accounts", :controller => "articles", :action => "index"
   match '/authors/all/page/:page', :controller => 'authors', :action => 'all'
   resources :authors do
     collection do
