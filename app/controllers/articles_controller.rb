@@ -117,7 +117,7 @@ class ArticlesController < ApplicationController
       @article.likes.create(:likeable_id => params[:id], :likeable_type => self.class.to_s, :account_id => current_account.id)
       status = 'liked'
     else
-      like.delete
+      like.destroy
       status = 'unliked'
     end
 

@@ -25,12 +25,12 @@ class CommentsController < ApplicationController
     redirect_to request.referer || article_index_path
   end
 
-def destroy
+  def destroy
     @comment = Comment.find(params[:id])
     if @comment.account_id != current_account.id
       flash[:error] = "You cannot delete other's comment"
     else
-      @comment.delete
+      @comment.destroy
       flash[:notice] = "Comment deleted successfully"
     end
     redirect_to request.referer || article_index_path
