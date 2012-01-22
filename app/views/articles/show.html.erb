@@ -59,7 +59,7 @@
               <div class="comment-footer">
                 <div class="post-date"><%= time_ago_in_words(c.created_at.gmtime) %> ago</div>
                 <div class="comment-actions">
-                  <% if defined?(current_account) and current_account.id == c.account.id %>
+                  <% if defined?(current_account) and current_account and current_account.id == c.account.id %>
                     <%= link_to_function "Modify", "modify_comment(#{c.id})" %>
                     <%= link_to "Delete", c, :method => :delete, :confirm => "Do you really want to delete the comment?" %>
                   <% end %>
