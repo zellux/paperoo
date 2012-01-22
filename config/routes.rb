@@ -16,8 +16,12 @@ Paperoo::Application.routes.draw do
   end
 
   resources :articles do
-    post 'upload', :on => :collection
-    get '/page/:page', :on => :collection, :action => "index"
+    collection do
+      get :autocomplete_article_title
+      post 'upload'
+      get '/page/:page', :action => "index"
+    end
+
     member do
       post 'toggle_like', :format => :json
     end

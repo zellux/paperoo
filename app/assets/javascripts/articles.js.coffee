@@ -64,3 +64,6 @@ $ ->
     form = $(html)
     form.wrap(div_outer)
     comment_message.replaceWith(form.outerHTML())
+
+  $('#article_search_field').bind 'railsAutocomplete.select', (event, data) =>
+    window.location = "/articles/#{data.item.id}"

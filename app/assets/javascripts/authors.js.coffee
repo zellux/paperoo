@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-        $('#author_search_field').bind 'railsAutocomplete.select', (event, data) =>
-                window.location = "/authors/#{data.item.id}"
+  $('#author_search_field').bind 'railsAutocomplete.select', (event, data) =>
+    window.location = "/authors/#{data.item.id}"
