@@ -33,12 +33,20 @@
 </div>
 
 <div class="row article-social">
-  <div class="row like offset1">
-    <% if @like %>
-      <%= link_to "Unlike", toggle_like_article_path, :method => :post, :format => :json, :remote => true, :class => 'like_button button icon like' %>
-    <% else %>
-      <%= link_to "Like", toggle_like_article_path, :method => :post, :format => :json, :remote => true, :class => 'like_button button icon like' %>
-    <% end %>
+  <div class="row">
+    <div class="like offset1">
+      <% if @like %>
+        <%= link_to "Unlike", toggle_like_article_path, :method => :post, :format => :json, :remote => true, :class => 'like_button button icon like' %>
+      <% else %>
+        <%= link_to "Like", toggle_like_article_path, :method => :post, :format => :json, :remote => true, :class => 'like_button button icon like' %>
+      <% end %>
+      <div class="like-list">
+        <% unless @article.likes.blank? %>
+          Liked by
+          <%= @article.likes.each.map { |e| e.account.username }.join(', ') %>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="row">

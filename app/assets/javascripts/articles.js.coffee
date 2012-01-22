@@ -47,7 +47,12 @@ $ ->
       like_button.text('Like')
     else if data['status'] == 'liked'
       like_button.text('Unlike')
-    end
+    likelist = ''
+    if data['current'].length > 0
+      console.log(data)
+      likelist = 'Liked by ' + [u['username'] for u in data['current']].join(', ')
+      console.log likelist
+    $('.like-list').html(likelist)
 
   this.modify_comment = modify_comment = (i) ->
     comment = $("#comment#{i}")

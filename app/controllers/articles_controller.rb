@@ -116,14 +116,10 @@ class ArticlesController < ApplicationController
     like = @article.likes.where(:account_id => current_account).first
     if like.nil?
       @article.likes.create(:likeable_id => params[:id], :likeable_type => self.class.to_s, :account_id => current_account.id)
-      status = 'liked'
+      @status = 'liked'
     else
       like.destroy
-      status = 'unliked'
-    end
-
-    respond_to do |format|
-      format.json { render json: { 'status' => status } }
+      @status = 'unliked'
     end
   end
 

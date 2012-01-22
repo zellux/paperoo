@@ -12,6 +12,7 @@
 
 class Like < ActiveRecord::Base
   belongs_to :likeable, :polymorphic => true
+  belongs_to :account
   validate :likeable_id, :likeable_type, :account_id, :presence => true
 
   def self.for(object, account)

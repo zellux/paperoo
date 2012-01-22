@@ -14,6 +14,12 @@
 
 .article-social {
     margin-top: 20px;
+    .like {
+        .like-list {
+            font-size: 14px;
+            display: inline;
+        }
+    }
     .comments {
         margin-top: 15px;
         .comment {
