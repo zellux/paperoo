@@ -3,7 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 // *= require fileuploader
 
-.article_info {
+.article-info {
+    h1 {
+        font-family: 'PT Serif', Georgia, 'Helvetica Neue', sans-serif;
+    }
     .row {
         margin-top: 10px;
         .label {
