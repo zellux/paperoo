@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<div class="row article_social">
+<div class="row article-social">
   <div class="row like offset1">
     <% if @like %>
       <%= link_to "Unlike", toggle_like_article_path, :method => :post, :format => :json, :remote => true, :class => 'like_button button icon like' %>
@@ -46,20 +46,24 @@
       <% if @article.comments.blank? %>
         No comments yet.
       <% else %>
-        <% @article.comments.each do |c| %>
-          <div class="row comment">
+        <% @article.comments.each_with_index do |c, i| %>
+          <div class="row comment" id="comment<%= c.id %>">
             <div class="comment-avatar span1"><%= image_tag c.account.avatar_url(36) %></div>
             <div class="comment-body offset1">
               <div class="comment-header">
                 <div class="comment-author"><%= c.account.username %></div>
               </div>
               <div class="comment-message">
-                <div class="comment-text">
-                  <%= c.text %>
-                </div>
+                <div class="comment-text"><%= c.text %></div>
               </div>
               <div class="comment-footer">
-                <div class="post_date"><%= time_ago_in_words(c.created_at.gmtime) %> ago</div>
+                <div class="post-date"><%= time_ago_in_words(c.created_at.gmtime) %> ago</div>
+                <div class="comment-actions">
+                  <% if defined?(current_account) and current_account.id == c.account.id %>
+                    <%= link_to_function "Modify", "modify_comment(#{c.id})" %>
+                    <%= link_to "Delete", c, :method => :delete, :confirm => "Do you really want to delete the comment?" %>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
@@ -74,7 +78,7 @@
         Please sign in to comment.
       <% else %>
         <div class="comment-reply">
-        <div class="comment-avatar span1"><%= image_tag current_account.avatar_url(36) %></div>
+          <div class="comment-avatar span1"><%= image_tag current_account.avatar_url(36) %></div>
           <%= form_tag(:controller => 'comments', :action => 'create') do %>
             <%= hidden_field_tag(:commentable_id, @article.id) %>
             <%= hidden_field_tag(:commentable_type, @article.class.to_s) %>

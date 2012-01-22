@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-extra
 //= require twitter/bootstrap
 //= require jquery-ui
 //= require chosen-jquery

@@ -39,6 +39,8 @@ $ ->
       if value
         $("#article_#{i}").val(value)
 
+
+
   like_button = $(".article_social .like_button")
   like_button.bind "ajax:success", (event, data, status, xhr) =>
     if data['status'] == 'unliked'
@@ -46,3 +48,19 @@ $ ->
     else if data['status'] == 'liked'
       like_button.text('Unlike')
     end
+
+  this.modify_comment = modify_comment = (i) ->
+    comment = $("#comment#{i}")
+    comment_message = $("#comment#{i} .comment-message")
+    text = $("#comment#{i} .comment-message .comment-text").text()
+    csrf_token = $('meta[name=csrf-token]')[0].content
+    div_outer = $('<div class="comment-reply"></div>')
+    html = '<form action="/comments/' + i + '" method="POST">
+     <input name="_method" type="hidden" value="put" />
+     <input name="authenticity_token" type="hidden" value="' + csrf_token + '"/>
+     <textarea name="text" class="span7">' + text + '</textarea>
+     <input type="submit" value="Update" class="btn primary" />
+     </form>'
+    form = $(html)
+    form.wrap(div_outer)
+    comment_message.replaceWith(form.outerHTML())

@@ -12,11 +12,12 @@
     }
 }
 
-.article_social {
+.article-social {
     margin-top: 20px;
     .comments {
         margin-top: 15px;
         .comment {
+            margin-bottom: 10px;
             .comment-avatar {
                 position: absolute;
                 padding-left: 10px;
@@ -40,7 +41,11 @@
                     margin-bottom: 18px;
                 }
                 .comment-footer {
-                    .post_date {
+                    .post-date {
+                        display: inline;
+                    }
+                    .comment-actions {
+                        display: inline;
                     }
                 }
             }
