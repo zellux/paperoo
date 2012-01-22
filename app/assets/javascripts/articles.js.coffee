@@ -63,7 +63,7 @@ $ ->
     html = '<form action="/comments/' + i + '" method="POST">
      <input name="_method" type="hidden" value="put" />
      <input name="authenticity_token" type="hidden" value="' + csrf_token + '"/>
-     <textarea name="text" class="span7">' + text + '</textarea>
+     <textarea name="text" class="span7" rows="4">' + text + '</textarea>
      <input type="submit" value="Update" class="btn primary" />
      </form>'
     form = $(html)

@@ -91,7 +91,7 @@
             <%= hidden_field_tag(:commentable_type, @article.class.to_s) %>
             <div class="row">
               <div class="span7 offset1">
-                <%= text_area_tag(:text, nil, :placeholder => "Type your comment here.", :class => 'span7') %>
+                <%= text_area_tag(:text, nil, :rows => "4", :placeholder => "Type your comment here.", :class => 'span7') %>
               </div>
             </div>
             <div class="row">

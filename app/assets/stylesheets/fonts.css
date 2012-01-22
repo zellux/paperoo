@@ -30,3 +30,27 @@
   src: local('PT Serif Italic'), local('PTSerif-Italic'), url('03aPdn7fFF3H6ngCgAlQzBsxEYwM7FgeyaSgU71cLG0.woff') format('woff');
 }
 }
+@font-face {
+  font-family: 'Cantarell';
+  font-style: italic;
+  font-weight: bold;
+  src: local('Cantarell Bold Oblique'), local('Cantarell-BoldOblique'), url('weehrwMeZBXb0QyrWnRwFRbnBKKEOwRKgsHDreGcocg.woff') format('woff');
+}
+@font-face {
+  font-family: 'Cantarell';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Cantarell Regular'), local('Cantarell-Regular'), url('V86VyqXbc09Sss3BPsMj17O3LdcAZYWl9Si6vvxL-qU.woff') format('woff');
+}
+@font-face {
+  font-family: 'Cantarell';
+  font-style: italic;
+  font-weight: normal;
+  src: local('Cantarell Oblique'), local('Cantarell-Oblique'), url('Qd6zZq_wf1596L3V_8MIs7rIa-7acMAeDBVuclsi6Gc.woff') format('woff');
+}
+@font-face {
+  font-family: 'Cantarell';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Cantarell Bold'), local('Cantarell-Bold'), url('http://Yir4ZDsCn4g1kWopdg-ehKRDOzjiPcYnFooOUGCOsRk.woff') format('woff');
+}

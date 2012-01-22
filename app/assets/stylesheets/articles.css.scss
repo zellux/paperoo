@@ -19,6 +19,7 @@
     margin-top: 20px;
     .like {
         .like-list {
+            font-family: Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 14px;
             display: inline;
         }
@@ -45,6 +46,10 @@
                         color: #3B5998;
                     }
                 }
+                textarea {
+                    font-family: 'PT Serif', Georgia, 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
+                    font-size: 18px;
+                }
                 .comment-message {
                     font-size: 18px;
                     margin-bottom: 18px;
@@ -66,6 +71,10 @@
         .comment-avatar {
             padding-left: 10px;
             position: absolute;
+        }
+        textarea {
+            font-family: 'PT Serif', Georgia, 'Hiragino Sans GB', 'Helvetica Neue', sans-serif;
+            font-size: 18px;
         }
     }
 }
