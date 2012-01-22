@@ -41,7 +41,7 @@ $ ->
 
 
 
-  like_button = $(".article_social .like_button")
+  like_button = $(".article-social .like_button")
   like_button.bind "ajax:success", (event, data, status, xhr) =>
     if data['status'] == 'unliked'
       like_button.text('Like')
