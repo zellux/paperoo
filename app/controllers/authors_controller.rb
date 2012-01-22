@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_filter :authenticate_account!, :except => [:index, :show, :all]
+  before_filter :authenticate_account!, :except => [:index, :show, :all, :autocomplete_author_name]
   before_filter :update_page_view, :only=> [:show]
   autocomplete :author, :name
 

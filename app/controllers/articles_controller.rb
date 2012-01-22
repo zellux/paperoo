@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticate_account!, :except => [:index, :show]
+  before_filter :authenticate_account!, :except => [:index, :show, :autocomplete_article_title]
   before_filter :update_page_view, :only=> [:show]
   autocomplete :article, :title, :full => true
 
