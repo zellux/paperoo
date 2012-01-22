@@ -47,7 +47,7 @@ set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
 after 'deploy:update_code', 'deploy:symlink_shared'
 before 'deploy:finalize_update', 'deploy:symlink_config'
 # after 'deploy:finalize_update', 'deploy:assets:precompile'
-# before "deploy:assets:precompile", "bundle:install"
+before "deploy:assets:precompile", "deploy:assets:clean"
 
 namespace :deploy do
   task :start do

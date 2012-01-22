@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     page_id = params[:page] || 1
-    @articles = Article.page(page_id)
+    @articles = Article.order('comments_count desc').page(page_id)
 
     respond_to do |format|
       format.html # index.html.erb

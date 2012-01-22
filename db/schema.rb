@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120121121143) do
+ActiveRecord::Schema.define(:version => 20120122025411) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -41,7 +41,8 @@ ActiveRecord::Schema.define(:version => 20120121121143) do
     t.datetime "updated_at"
     t.integer  "page_start"
     t.integer  "page_end"
-    t.integer  "pageview",      :default => 0
+    t.integer  "pageview",       :default => 0
+    t.integer  "comments_count", :default => 0
   end
 
   create_table "author_lines", :force => true do |t|

@@ -3,6 +3,7 @@
   <tr>
     <th>Conference</th>
     <th>Title</th>
+    <th>Comments</th>
   </tr>
   </thead>
   <tbody>
@@ -10,6 +11,7 @@
    <tr>
     <td><%= article.conference.title rescue '' %></td>
     <td><%= link_to article.title, article_path(article) %>
+    <td><%= article.comments_count %>
     </tr>
     <% end -%>
    </tbody>
