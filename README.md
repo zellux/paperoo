@@ -9,21 +9,21 @@ Prerequisitions
 Installation
 ---
 
-1. Install required ruby gems
+- Install required ruby gems
 
 ```
 $ bundle install
 ```
 
-2. Copy config/database.yml/example to config/database.yml, and edit the file as you need
+- Copy config/database.yml/example to config/database.yml, and edit the file as you need
 
-3. Setup database
+- Setup database
 
 ```
 $ rake db:setup
 ```
 
-4. Load conference data into database
+- Load conference data into database
 
 ```
 $ rake db:data:load
