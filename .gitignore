@@ -7,3 +7,4 @@ tmp/
 .#*
 db/raw_data
 config/database.yml
+.rvmrc

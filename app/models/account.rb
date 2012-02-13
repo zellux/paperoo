@@ -19,6 +19,8 @@
 #
 
 class Account < ActiveRecord::Base
+  has_one :assistant, :class_name => "Account", :foreign_key => :assistant_id
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
