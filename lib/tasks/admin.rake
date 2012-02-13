@@ -4,11 +4,11 @@ require 'admin.rb'
 namespace :admin do
   include Admin
 
-  task :assign_position, [:position_file] => :environment do |t, args|
-    assign_position(args.position_file)
+  task :assign_position => :environment do |t, args|
+    assign_position(Rails.root + 'db/position.yml')
   end
 
-  task :assign_assistant, [:assistant_file] => :environment do |t, args|
-    assign_assistant(args.assistant_file)
+  task :assign_assistant => :environment do |t, args|
+    assign_assistant(Rails.root + 'db/assistant.yml')
   end
 end

@@ -33,3 +33,22 @@ Deployment
 ---
 We use [capistrano](https://github.com/capistrano/capistrano) for remote deployment. See config/deploy.rb for more configurations if you want to deploy on your own server.
 
+Administration
+---
+
+- Assign the presentation order
+  1. First edit `db/position.yml`, add content like this:
+
+         user1: 1
+         user2: 2
+
+  2. Run `rake admin:assign_position`.
+
+- Assign assistant
+  1. first edit `db/assistant.yml`, add content like this:
+
+         user1: user2
+         user2: user1
+
+  2. Run `rake admin:assign_assistant`.
+
