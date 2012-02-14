@@ -1,18 +1,17 @@
 module Admin
 
   def assign_position(position_file)
-    accounts = YAML.load(File.open(position_file))
-    accounts.each do |username, position|
-      acc = Account.where('username = ?', username).first
-      unless acc
-        puts "User: #{username} does not exist"
-        return
-      end
-
-      acc.presentation_position = position.to_i
-      acc.save!
-      end
+    users = {}
+    usernames = YAML.load(File.open(position_file))
+    usernames.each_with_index do |username, position|
+      users[username] = position + 1
     end
+
+    Account.all.each do |user|
+      user.presentation_position = users[user.username]
+      user.save!
+    end
+  end
 
   def assign_assistant(assistant_file)
     assistant = YAML.load(File.open(assistant_file))

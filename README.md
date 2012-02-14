@@ -39,8 +39,8 @@ Administration
 - Assign the presentation order
   1. First edit `db/position.yml`, add content like this:
 
-         user1: 1
-         user2: 2
+         - user1
+         - user2
 
   2. Run `rake admin:assign_position`.
 
