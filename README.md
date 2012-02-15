@@ -44,6 +44,12 @@ Administration
 
   2. Run `rake admin:assign_position`.
 
+- Initialize presentation assignment. **This is required before access this
+  function on the web site**. You need to specify the user who should give
+  presentation first.
+
+      rake admin:init_presentation[foo]
+
 - Assign assistant
   1. first edit `db/assistant.yml`, add content like this:
 

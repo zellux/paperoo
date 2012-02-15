@@ -24,6 +24,7 @@ class Article < ActiveRecord::Base
   has_many :authors, :through => :author_lines, :order => 'author_lines.position'
   has_many :likes, :as => :likeable
   has_many :comments, :as => :commentable
+  has_one  :presentation
 
   validates :conference, :presence => true
   # validates :author_lines, :presence => true
