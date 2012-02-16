@@ -17,6 +17,31 @@ class Presentation < ActiveRecord::Base
   belongs_to :account, :class_name => "Account"
   belongs_to :assigner, :class_name => "Account", :foreign_key => :assigner_id
 
+  def assign(assigner, presenter, article)
+    self.account = presenter
+    self.assigner = assigner
+    self.article = article
+    self.create_date = DateTime.now
+
+    # Calculate presentation date according to the position of presenter
+    position = presenter.presentation_position
+  end
+
+  def self.next_unassigned_date(account, position)
+    last_present = where("account_id = ?", account.id).order("assigned_date DESC")
+    return next_meeting_day unless latest_present
+
+    largest_position = Account.largest_position
+    if largest_position.odd?
+    end
+    #latest_pos = latest_present.account.presentation_position
+    #delta = latest_pos < position ?
+      #position - latest_pos :
+      #largest_position - latest_pos + position
+
+    #delta = delta / 2
+  end
+
   def self.next_meeting_day(date = nil)
     date = DateTime.now unless date
     # XXX hard coded, meeting happen on monday and thursday

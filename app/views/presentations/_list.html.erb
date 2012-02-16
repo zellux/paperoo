@@ -1,0 +1,18 @@
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>Presenter</th>
+      <th>Presentation Date</th>
+      <th>Article</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% presentations.each do |pres| -%>
+      <tr>
+        <td><%= pres.account.username %></td>
+        <td><%= pres.assigned_date.strftime("%Y-%m-%d") %></td>
+        <td><%= link_to pres.article.title, article_path(pres.article) rescue '' %>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>

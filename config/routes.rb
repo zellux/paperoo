@@ -31,6 +31,9 @@ Paperoo::Application.routes.draw do
   resources :comments do
   end
 
+  #resources :presentations
+  match "/presentations", :controller => "presentations", :action => "index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
