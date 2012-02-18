@@ -13,6 +13,15 @@ namespace :admin do
   end
 
   task :init_presentation, [:start_user] => :environment do |t, args|
-    Presentation.init_assignment(args.start_user)
+    if args[:start_user] == nil
+      puts "Please specify the first presenter's user name like this:"
+      puts "\trake admin:init_presentation[who]"
+    else
+      Presentation.init_round(args[:start_user])
+    end
+  end
+
+  task :new_presentation_round => :environment do |t, args|
+    Presentation.new_round
   end
 end

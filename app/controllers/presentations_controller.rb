@@ -4,7 +4,7 @@ class PresentationsController < ApplicationController
   def index
     page_id = params[:page] || 1
     @presentations = Presentation.where("presented_on is null").
-      order('assigned_date desc').
+      order('assigned_date asc').
       page(page_id)
 
     respond_to do |format|

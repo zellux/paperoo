@@ -27,21 +27,6 @@ class Presentation < ActiveRecord::Base
     position = presenter.presentation_position
   end
 
-  def self.next_unassigned_date(account, position)
-    last_present = where("account_id = ?", account.id).order("assigned_date DESC")
-    return next_meeting_day unless latest_present
-
-    largest_position = Account.largest_position
-    if largest_position.odd?
-    end
-    #latest_pos = latest_present.account.presentation_position
-    #delta = latest_pos < position ?
-      #position - latest_pos :
-      #largest_position - latest_pos + position
-
-    #delta = delta / 2
-  end
-
   def self.next_meeting_day(date = nil)
     date = DateTime.now unless date
     # XXX hard coded, meeting happen on monday and thursday
@@ -51,19 +36,44 @@ class Presentation < ActiveRecord::Base
     return date
   end
 
-  def self.init_assignment(username)
+  # This is only used when there's no presentation
+  def self.init_round(username)
     start_user = Account.where("username = ?", username).first
     position = start_user.presentation_position
+    new_round(position)
+  end
 
-    meeting_day = next_meeting_day
+  def self.new_round(start_position = nil)
+    position = start_position || 1
+
+    # XXX hard coded, 2 presenters each meeting
+    latest_pres = order("assigned_date DESC").first
+    if latest_pres
+      latest_day = latest_pres.assigned_date
+      # XXX find out how ActiveRecord supports SQL count
+      latest_count = where("assigned_date = ?", latest_day).limit(2).all.size
+      meeting_day = latest_count == 1 ?
+        latest_day :
+        next_meeting_day(latest_day + 1.day)
+    else
+      latest_count = 0
+      meeting_day = next_meeting_day
+    end
+
     largest_position = Account.largest_position
-    largest_position.times do
-      acc = Account.find(position)
+    largest_position.times do |i|
+      acc = Account.where("presentation_position = ?", position).first
       pres = Presentation.create!(account: acc,
                                   assigned_date: meeting_day)
-      pres.save!
       position += 1
       position = 1 if position > largest_position
+
+      # Tricky here. If latest_count is 1, we need to update meeting_day after
+      # creating the first presentation
+      if (latest_count + i) % 2 == 1
+        meeting_day = next_meeting_day meeting_day + 1.day
+      end
     end
   end
+
 end
