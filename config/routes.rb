@@ -31,7 +31,11 @@ Paperoo::Application.routes.draw do
   resources :comments do
   end
 
-  resources :presentations
+  resources :presentations do
+    member do
+      get 'set_presented'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

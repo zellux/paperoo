@@ -3,9 +3,17 @@ class PresentationsController < ApplicationController
   # GET /presentations.json
   def index
     page_id = params[:page] || 1
-    @presentations = Presentation.where("presented_on is null").
-      order('assigned_date asc').
-      page(page_id)
+    if params[:presented]
+      # Show all presentation
+      @presentations = Presentation.where("presented_on not null").
+        order('assigned_date desc').
+        page(page_id)
+    else
+      # Show only not presented
+      @presentations = Presentation.where("presented_on is null").
+        order('assigned_date asc').
+        page(page_id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -87,6 +95,23 @@ class PresentationsController < ApplicationController
     @presentation = Presentation.find(params[:id])
     @presentation.destroy
 
+    respond_to do |format|
+      format.html { redirect_to presentations_url }
+      format.json { head :ok }
+    end
+  end
+
+  def set_presented
+    @presentation = Presentation.find(params[:id].to_i)
+
+    # User account checking
+    if current_account.username != @presentation.account.username
+      format.html { redirect_to presentations_url, notice: "Can't set presented on for others presentation." }
+      format.json { render :status => :no_permission}
+      return
+    end
+
+    @presentation.update_attribute(:presented_on, DateTime.now)
     respond_to do |format|
       format.html { redirect_to presentations_url }
       format.json { head :ok }

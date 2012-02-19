@@ -17,6 +17,12 @@ class Presentation < ActiveRecord::Base
   belongs_to :account, :class_name => "Account"
   belongs_to :assigner, :class_name => "Account", :foreign_key => :assigner_id
 
+  attr_accessible :article, :account, :assigned_date
+
+  # Will report already taken even if null?
+  #validates :article_id, :uniqueness => true
+  validates :account_id, :presence => true
+
   # XXX Used in _form, is there better way to get nested model's field?
   def article_title
     article ? article.title.chomp : ''
@@ -30,7 +36,6 @@ class Presentation < ActiveRecord::Base
     self.account = presenter
     self.assigner = assigner
     self.article = article
-    self.create_date = DateTime.now
 
     # Calculate presentation date according to the position of presenter
     position = presenter.presentation_position
