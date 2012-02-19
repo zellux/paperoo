@@ -29,7 +29,7 @@ class Presentation < ActiveRecord::Base
   end
 
   def account_username
-    account.username
+    account ? account.username : ''
   end
 
   def assign(assigner, presenter, article)

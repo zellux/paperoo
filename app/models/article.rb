@@ -117,6 +117,10 @@ class Article < ActiveRecord::Base
     end
   end
 
+  def self.find_by_title(title)
+    title ? article = Article.where("title = ?", title.chomp + "\n").first : nil
+  end
+
   def author_list
     if self.authors.nil?
       ''

@@ -52,6 +52,15 @@ class PresentationsController < ApplicationController
   # POST /presentations.json
   def create
     @presentation = Presentation.new(params[:presentation])
+    presenthash = params[:presentation]
+
+    article = Article.find_by_title(presenthash[:article_title])
+    @presentation.article = article
+
+    account = Account.where(:username => presenthash[:account_username]).first
+    @presentation.account = account
+
+    @presentation.save!
 
     respond_to do |format|
       if @presentation.save
@@ -71,7 +80,7 @@ class PresentationsController < ApplicationController
     presenthash = params[:presentation]
 
     respond_to do |format|
-      article = Article.where("title = ?", presenthash[:article].chomp + "\n").first
+      article = Article.find_by_title(presenthash[:article_title])
       if article == nil
         format.html { render action: "edit", notice: "Article not found" }
         # TODO In page editing
