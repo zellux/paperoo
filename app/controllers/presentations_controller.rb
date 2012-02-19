@@ -117,4 +117,8 @@ class PresentationsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def new_round
+    Presentation.new_round
+  end
 end

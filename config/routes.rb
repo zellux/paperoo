@@ -31,6 +31,7 @@ Paperoo::Application.routes.draw do
   resources :comments do
   end
 
+  match 'presentations/new_round', :controller => "presentations", :action => "new_round"
   resources :presentations do
     member do
       get 'set_presented'
