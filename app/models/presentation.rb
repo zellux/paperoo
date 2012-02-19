@@ -17,6 +17,15 @@ class Presentation < ActiveRecord::Base
   belongs_to :account, :class_name => "Account"
   belongs_to :assigner, :class_name => "Account", :foreign_key => :assigner_id
 
+  # XXX Used in _form, is there better way to get nested model's field?
+  def article_title
+    article ? article.title.chomp : ''
+  end
+
+  def account_username
+    account.username
+  end
+
   def assign(assigner, presenter, article)
     self.account = presenter
     self.assigner = assigner

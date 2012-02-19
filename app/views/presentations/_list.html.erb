@@ -4,6 +4,7 @@
       <th>Presenter</th>
       <th>Presentation Date</th>
       <th>Article</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -12,6 +13,7 @@
         <td><%= pres.account.username %></td>
         <td><%= pres.assigned_date.strftime("%Y-%m-%d") %></td>
         <td><%= link_to pres.article.title, article_path(pres.article) rescue '' %>
+        <td><%= link_to 'Edit', edit_presentation_path(pres) %></td>
       </tr>
     <% end -%>
   </tbody>

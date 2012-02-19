@@ -12,21 +12,23 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :account %><br />
+    <%= f.text_field :account_username %>
+  </div>
+  <div class="field">
     <%= f.label :article %><br />
-    <%= f.number_field :article %>
+    <%= f.text_field :article_title %>
   </div>
   <div class="field">
-    <%= f.label :presenter %><br />
-    <%= f.number_field :presenter %>
+    <%= f.label :assigned_date %><br />
+    <%= f.date_select :assigned_date %>
   </div>
-  <div class="field">
-    <%= f.label :assign_date %><br />
-    <%= f.datetime_select :assign_date %>
-  </div>
-  <div class="field">
-    <%= f.label :present_date %><br />
-    <%= f.datetime_select :present_date %>
-  </div>
+  <!--
+     -<div class="field">
+     -  <%= f.label :presented_on %><br />
+     -  <%= f.date_select :presented_on %>
+     -</div>
+     -->
   <div class="actions">
     <%= f.submit %>
   </div>

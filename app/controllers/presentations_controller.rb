@@ -60,14 +60,23 @@ class PresentationsController < ApplicationController
   # PUT /presentations/1.json
   def update
     @presentation = Presentation.find(params[:id])
+    presenthash = params[:presentation]
 
     respond_to do |format|
-      if @presentation.update_attributes(params[:presentation])
-        format.html { redirect_to @presentation, notice: 'Presentation was successfully updated.' }
-        format.json { head :ok }
+      article = Article.where("title = ?", presenthash[:article].chomp + "\n").first
+      if article == nil
+        format.html { render action: "edit", notice: "Article not found" }
+        # TODO In page editing
+        format.json { render status: :no_article}
       else
-        format.html { render action: "edit" }
-        format.json { render json: @presentation.errors, status: :unprocessable_entity }
+        presenthash[:article] = article
+        if @presentation.update_attributes(params[:presentation])
+          format.html { redirect_to @presentation, notice: 'Presentation was successfully updated.' }
+          format.json { head :ok }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @presentation.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -2,22 +2,22 @@
 
 <p>
   <b>Article:</b>
-  <%= @presentation.article %>
+  <%= @presentation.article.title rescue '' %>
 </p>
 
 <p>
   <b>Presenter:</b>
-  <%= @presentation.presenter %>
+  <%= @presentation.account.username %>
 </p>
 
 <p>
-  <b>Assign date:</b>
-  <%= @presentation.assign_date %>
+  <b>Assigned date:</b>
+  <%= @presentation.assigned_date.strftime("%Y-%m-%d") %>
 </p>
 
 <p>
-  <b>Present date:</b>
-  <%= @presentation.present_date %>
+  <b>Presented on:</b>
+  <%= @presentation.presented_on %>
 </p>
 
 
