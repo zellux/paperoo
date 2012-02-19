@@ -60,14 +60,19 @@ class PresentationsController < ApplicationController
     account = Account.where(:username => presenthash[:account_username]).first
     @presentation.account = account
 
-    @presentation.save!
-
     respond_to do |format|
-      if @presentation.save
+      # Check for uniquess. Using ActiveModel validation doesn't allow null.
+      if article == nil and presenthash[:article_title] != ''
+        format.html { render action: "new", notice: 'Article not found.' }
+        format.json { render json: @presentation.errors, status: :article_not_found, location: @presentation }
+      elsif article and not Presentation.unique_article(article)
+        format.html { render action: "new", notice: 'Article already taken.' }
+        format.json { render json: @presentation.errors, status: :article_taken, location: @presentation }
+      elsif @presentation.save
         format.html { redirect_to @presentation, notice: 'Presentation was successfully created.' }
         format.json { render json: @presentation, status: :created, location: @presentation }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", notice: @presentation.errors }
         format.json { render json: @presentation.errors, status: :unprocessable_entity }
       end
     end
@@ -86,13 +91,19 @@ class PresentationsController < ApplicationController
         # TODO In page editing
         format.json { render status: :no_article}
       else
-        presenthash[:article] = article
-        if @presentation.update_attributes(params[:presentation])
-          format.html { redirect_to @presentation, notice: 'Presentation was successfully updated.' }
-          format.json { head :ok }
+        # Check for uniqueness
+        unless Presentation.unique_article(article)
+          format.html { render action: "edit", :notice => "Article already taken" }
+          format.json { render json: @presentation, status: :created, location: @presentation }
         else
-          format.html { render action: "edit" }
-          format.json { render json: @presentation.errors, status: :unprocessable_entity }
+          presenthash[:article] = article
+          if @presentation.update_attributes(params[:presentation])
+            format.html { redirect_to @presentation, notice: 'Presentation was successfully updated.' }
+            format.json { head :ok }
+          else
+            format.html { render action: "edit" }
+            format.json { render json: @presentation.errors, status: :unprocessable_entity }
+          end
         end
       end
     end

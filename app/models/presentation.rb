@@ -13,13 +13,16 @@
 #
 
 class Presentation < ActiveRecord::Base
+  paginates_per 20
+
   belongs_to :article
   belongs_to :account, :class_name => "Account"
   belongs_to :assigner, :class_name => "Account", :foreign_key => :assigner_id
 
   attr_accessible :article, :account, :assigned_date
 
-  # Will report already taken even if null?
+  # Will report already taken even if null. Currently, do manual checking using
+  # the unique_article function.
   #validates :article_id, :uniqueness => true
   validates :account_id, :presence => true
 
@@ -77,8 +80,8 @@ class Presentation < ActiveRecord::Base
     largest_position = Account.largest_position
     largest_position.times do |i|
       acc = Account.where("presentation_position = ?", position).first
-      pres = Presentation.create!(account: acc,
-                                  assigned_date: meeting_day)
+      pres = Presentation.create(account: acc,
+                                 assigned_date: meeting_day)
       position += 1
       position = 1 if position > largest_position
 
@@ -88,6 +91,10 @@ class Presentation < ActiveRecord::Base
         meeting_day = next_meeting_day meeting_day + 1.day
       end
     end
+  end
+
+  def self.unique_article(article)
+    where("article_id = ?", article.id).first == nil
   end
 
 end
