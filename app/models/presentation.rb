@@ -6,8 +6,9 @@
 #  article_id    :integer
 #  account_id    :integer
 #  assigner_id   :integer
-#  assigned_date :datetime
-#  presented_on  :datetime
+#  assigned_date :date
+#  presentation_sent :boolean
+#  presented_on  :date
 #  created_at    :datetime
 #  updated_at    :datetime
 #
