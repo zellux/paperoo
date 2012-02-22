@@ -65,7 +65,7 @@ class PresentationsController < ApplicationController
       if article == nil and presenthash[:article_title] != ''
         format.html { render action: "new", notice: 'Article not found.' }
         format.json { render json: @presentation.errors, status: :article_not_found, location: @presentation }
-      elsif article and not Presentation.unique_article(article)
+      elsif article and not Presentation.unique_article?(article)
         format.html { render action: "new", notice: 'Article already taken.' }
         format.json { render json: @presentation.errors, status: :article_taken, location: @presentation }
       elsif @presentation.save
@@ -92,7 +92,7 @@ class PresentationsController < ApplicationController
         format.json { render status: :no_article}
       else
         # Check for uniqueness
-        unless Presentation.unique_article(article)
+        unless Presentation.unique_article?(article)
           format.html { render action: "edit", :notice => "Article already taken" }
           format.json { render json: @presentation, status: :created, location: @presentation }
         else
@@ -140,5 +140,21 @@ class PresentationsController < ApplicationController
 
   def new_round
     Presentation.new_round
+  end
+
+  def notify_upcoming
+    Presentation.upcoming.each do |pres|
+      begin
+        PresentationMailer.notification(pres).deliver
+        pres.notification_sent = true
+        pres.save!
+
+        respond_to do |format|
+          format.json { head :ok }
+        end
+      rescue
+        # Do nothing here
+      end
+    end
   end
 end

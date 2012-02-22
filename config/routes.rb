@@ -32,6 +32,7 @@ Paperoo::Application.routes.draw do
   end
 
   match 'presentations/new_round', :controller => "presentations", :action => "new_round"
+  match 'presentations/notify_upcoming', :controller => "presentations", :action => "notify_upcoming"
   resources :presentations do
     member do
       get 'set_presented'

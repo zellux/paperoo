@@ -1,0 +1,5 @@
+Your next paper presentation will be on <%= @pres.assigned_date %>.
+
+<% if @pres.article %>
+  Paper title: <%= @pres.article.title %>
+<% end %>

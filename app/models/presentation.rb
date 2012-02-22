@@ -94,8 +94,14 @@ class Presentation < ActiveRecord::Base
     end
   end
 
-  def self.unique_article(article)
+  def self.unique_article?(article)
     where("article_id = ?", article.id).first == nil
+  end
+
+  def self.upcoming
+    # XXX hard coded, check next week
+    where(:assigned_date => (Date.today..(Date.today + 1.week))).
+      where("notification_sent is null").all
   end
 
 end
