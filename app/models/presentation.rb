@@ -45,7 +45,7 @@ class Presentation < ActiveRecord::Base
   end
 
   def self.next_meeting_day(date = nil)
-    date = DateTime.now unless date
+    date = Date.today unless date
     # XXX hard coded, meeting happen on monday and thursday
     until date.monday? or date.thursday?
       date += 1.day

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120219102226) do
+ActiveRecord::Schema.define(:version => 20120222044102) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20120219102226) do
     t.integer  "article_id"
     t.integer  "account_id"
     t.integer  "assigner_id"
-    t.datetime "assigned_date"
-    t.datetime "presented_on"
+    t.date     "assigned_date"
+    t.date     "presented_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
