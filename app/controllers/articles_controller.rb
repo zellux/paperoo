@@ -123,6 +123,24 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def assign_presenter
+    @article = Article.find(params[:id])
+    pres = Presentation.where("article_id = ?", @article.id).first
+
+    presenthash = params[:article]
+    if presenthash[:presenter] == ''
+      Presentation.delete_article(current_account, @article)
+    else
+      presenter = Account.where('username = ?', presenthash[:presenter]).first
+      Presentation.assign_article(current_account, presenter, @article) if presenter
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @article }
+      format.json { head :ok }
+    end
+  end
+
   protected
 
   def update_page_view

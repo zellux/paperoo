@@ -31,6 +31,10 @@ class Article < ActiveRecord::Base
 
   attr_accessor :author_list
 
+  def presenter
+    presentation ? presentation.account.username : ''
+  end
+
   def self.create_from_bibtex(bibtex, optional={})
     hash = hash_from_bibtex(bibtex).merge(optional)
     return nil if hash['author_list'].blank?

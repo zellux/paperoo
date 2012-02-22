@@ -25,6 +25,7 @@ Paperoo::Application.routes.draw do
 
     member do
       post 'toggle_like', :format => :json
+      put 'assign_presenter'
     end
   end
 

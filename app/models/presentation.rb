@@ -36,13 +36,29 @@ class Presentation < ActiveRecord::Base
     account ? account.username : ''
   end
 
-  def assign(assigner, presenter, article)
-    self.account = presenter
-    self.assigner = assigner
-    self.article = article
+  def self.delete_article(assigner, article)
+    pres = where('article_id = ?', article.id).first
+    if pres
+      pres.article = nil
+      pres.assigner = assigner
+      pres.save!
+    end
+  end
 
-    # Calculate presentation date according to the position of presenter
-    position = presenter.presentation_position
+  def self.assign_article(assigner, presenter, article)
+    # Need to make this a transaction?
+    delete_article(assigner, article)
+
+    pres = first_unpresented(presenter)
+    unless pres
+      new_round
+      pres = first_unpresented(presenter)
+    end
+
+    pres.account = presenter
+    pres.assigner = assigner
+    pres.article = article
+    pres.save!
   end
 
   def self.next_meeting_day(date = nil)
@@ -102,6 +118,13 @@ class Presentation < ActiveRecord::Base
     # XXX hard coded, check next week
     where(:assigned_date => (Date.today..(Date.today + 1.week))).
       where("notification_sent is null").all
+  end
+
+private
+  # Find the first unpresented presentation for the presenter
+  def self.first_unpresented(presenter)
+    return where("presented_on is null and article_id is null and account_id = ?", presenter.id).
+        order("assigned_date asc").first
   end
 
 end
