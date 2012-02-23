@@ -6,4 +6,7 @@ tmp/
 *flymake.rb
 .#*
 db/raw_data
+db/assistant.yml
+db/position.yml
 config/database.yml
+.rvmrc

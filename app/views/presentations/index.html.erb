@@ -1,0 +1,16 @@
+<%= render :partial => "list", :locals => { :presentations => @presentations } %>
+
+<%= paginate @presentations %>
+
+<% if params[:presented] %>
+  <%= link_to "Show not presented", presentations_url %>
+<% else %>
+  <%= link_to "Show already presented", presentations_url(:presented => true) %>
+<% end %>
+
+<p></p>
+
+<%= link_to "Create New", new_presentation_path %>
+
+<p></p>
+

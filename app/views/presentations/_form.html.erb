@@ -1,0 +1,29 @@
+<%= form_for(@presentation) do |f| %>
+  <% if @presentation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@presentation.errors.count, "error") %> prohibited this presentation from being saved:</h2>
+
+      <ul>
+      <% @presentation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :presenter %><br />
+    <%= f.text_field :account_username %>
+  </div>
+  <div class="field">
+    <%= f.label :article_title %><br />
+    <%= f.text_field :article_title %>
+  </div>
+  <div class="field">
+    <%= f.label :assigned_date %><br />
+    <%= f.date_select :assigned_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

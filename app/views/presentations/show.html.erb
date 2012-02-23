@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Article:</b>
+  <%= @presentation.article.title rescue '' %>
+</p>
+
+<p>
+  <b>Presenter:</b>
+  <%= @presentation.account.username %>
+</p>
+
+<p>
+  <b>Assigned date:</b>
+  <%= @presentation.assigned_date.strftime("%Y-%m-%d") %>
+</p>
+
+<p>
+  <b>Presented on:</b>
+  <%= @presentation.presented_on %>
+</p>
+
+
+<%= link_to 'Edit', edit_presentation_path(@presentation) %> |
+<%= link_to 'Back', presentations_path %>

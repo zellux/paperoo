@@ -24,11 +24,16 @@ class Article < ActiveRecord::Base
   has_many :authors, :through => :author_lines, :order => 'author_lines.position'
   has_many :likes, :as => :likeable
   has_many :comments, :as => :commentable
+  has_one  :presentation
 
   validates :conference, :presence => true
   # validates :author_lines, :presence => true
 
   attr_accessor :author_list
+
+  def presenter
+    presentation ? presentation.account.username : ''
+  end
 
   def self.create_from_bibtex(bibtex, optional={})
     hash = hash_from_bibtex(bibtex).merge(optional)
@@ -114,6 +119,10 @@ class Article < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def self.find_by_title(title)
+    title ? article = Article.where("title = ?", title.chomp + "\n").first : nil
   end
 
   def author_list

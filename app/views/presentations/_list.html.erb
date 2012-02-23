@@ -1,0 +1,28 @@
+<table class="zebra-striped">
+  <thead>
+    <tr>
+      <th>Presenter</th>
+      <th>Presentation Date</th>
+      <th>Article</th>
+      <th>Presented On</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% presentations.each do |pres| -%>
+      <tr>
+        <td><%= pres.account.username %></td>
+        <td><%= pres.assigned_date.strftime("%Y-%m-%d") %></td>
+        <td><%= link_to pres.article.title, article_path(pres.article) rescue '' %>
+        <% if pres.presented_on %>
+          <td><%= pres.presented_on.strftime("%Y-%m-%d") %></td>
+        <% elsif pres.account == current_account %>
+          <td><%= link_to "Set Presented", set_presented_presentation_path(pres), :class => 'set_presented' %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= link_to 'Edit', edit_presentation_path(pres) %></td>
+      </tr>
+    <% end -%>
+  </tbody>
+</table>
