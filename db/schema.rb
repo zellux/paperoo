@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120122025411) do
+ActiveRecord::Schema.define(:version => 20120222050146) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20120122025411) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.integer  "presentation_position"
+    t.integer  "assistant_id"
   end
 
   add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
@@ -92,5 +94,18 @@ ActiveRecord::Schema.define(:version => 20120122025411) do
   end
 
   add_index "likes", ["likeable_id"], :name => "index_likes_on_likeable_id"
+
+  create_table "presentations", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "account_id"
+    t.integer  "assigner_id"
+    t.date     "assigned_date"
+    t.date     "presented_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "notification_sent"
+  end
+
+  add_index "presentations", ["article_id"], :name => "index_presentations_on_article_id", :unique => true
 
 end

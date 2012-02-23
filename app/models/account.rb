@@ -19,6 +19,9 @@
 #
 
 class Account < ActiveRecord::Base
+  has_one :assistant, :class_name => "Account", :foreign_key => :assistant_id
+  has_many :presentations
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -39,6 +42,10 @@ class Account < ActiveRecord::Base
   def avatar_url(size=48)
     gravatar_id = Digest::MD5.hexdigest(self.email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+  end
+
+  def self.largest_position
+    return self.order("presentation_position DESC").first.presentation_position
   end
 
 protected

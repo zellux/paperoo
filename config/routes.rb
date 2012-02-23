@@ -25,10 +25,19 @@ Paperoo::Application.routes.draw do
 
     member do
       post 'toggle_like', :format => :json
+      put 'assign_presenter'
     end
   end
 
   resources :comments do
+  end
+
+  match 'presentations/new_round', :controller => "presentations", :action => "new_round"
+  match 'presentations/notify_upcoming', :controller => "presentations", :action => "notify_upcoming"
+  resources :presentations do
+    member do
+      get 'set_presented'
+    end
   end
 
   # The priority is based upon order of creation:
